@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VendePronto PRO</title>
+<style>
+:root{--green:#168653;--green-dark:#106b41;--mint:#eaf6ef;--bg:#f5f8f6;--ink:#183329;--muted:#718078;--line:#e3ebe6;--white:#fff;--red:#b84b4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:Inter,Arial,sans-serif;color:var(--ink)}
+button,input,select,textarea{font:inherit}button{cursor:pointer}
+.shell{display:flex;min-height:100vh}.sidebar{width:248px;background:#fff;border-right:1px solid var(--line);padding:24px 16px;display:flex;flex-direction:column;gap:24px}
+.brand{display:flex;align-items:center;gap:10px;padding:0 8px}.brand-mark{width:38px;height:38px;border-radius:12px;background:var(--green);color:#fff;display:grid;place-items:center;font-weight:800}.brand strong{font-size:17px}.brand small{display:block;color:var(--green);font-weight:700;font-size:10px;letter-spacing:1.5px;margin-top:3px}
+.nav-label{font-size:10px;color:#9aa79f;font-weight:800;letter-spacing:1.3px;padding:0 10px;margin-bottom:7px}.nav{display:grid;gap:5px}.nav button{border:0;background:transparent;text-align:left;padding:11px 12px;border-radius:10px;color:#53645a;font-weight:600}.nav button:hover,.nav button.active{background:var(--mint);color:var(--green-dark)}.nav button span{display:inline-block;width:25px}
+.sidebar-bottom{margin-top:auto;border-top:1px solid var(--line);padding:16px 8px 0;color:var(--muted);font-size:12px;line-height:1.5}
+.main{flex:1;min-width:0}.topbar{height:72px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 34px}.crumb{color:var(--muted);font-size:13px}.user{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:700}.avatar{width:34px;height:34px;border-radius:50%;background:var(--mint);color:var(--green);display:grid;place-items:center}
+.content{max-width:1180px;padding:34px;margin:auto}.heading{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;margin-bottom:26px}.heading h1{font-size:27px;margin:0 0 7px}.heading p{margin:0;color:var(--muted);font-size:14px}.btn{border:0;border-radius:9px;padding:11px 15px;font-weight:700}.primary{background:var(--green);color:white}.primary:hover{background:var(--green-dark)}.secondary{background:#fff;border:1px solid var(--line);color:var(--ink)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin-bottom:22px}.stat,.panel{background:#fff;border:1px solid var(--line);border-radius:14px;padding:19px}.stat small{color:var(--muted);font-weight:600}.stat strong{display:block;font-size:26px;margin-top:10px}.stat em{font-style:normal;color:var(--green);font-size:12px}
+.panel h2{font-size:16px;margin:0 0 16px}.panel p.muted{font-size:13px;color:var(--muted);line-height:1.6}.grid-two{display:grid;grid-template-columns:1.3fr 1fr;gap:16px}.empty{border:1px dashed #d5e2d9;border-radius:12px;padding:28px;text-align:center;color:var(--muted);font-size:13px}.empty b{display:block;color:var(--ink);font-size:14px;margin-bottom:6px}
+.toolbar{display:flex;gap:10px;margin-bottom:15px}.toolbar input,.field input,.field select,.field textarea{width:100%;border:1px solid var(--line);border-radius:9px;padding:11px 12px;background:#fff;outline:none}.toolbar input:focus,.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--green)}
+table{width:100%;border-collapse:collapse;font-size:13px}th{text-align:left;color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.5px;padding:12px 9px;border-bottom:1px solid var(--line)}td{padding:14px 9px;border-bottom:1px solid #eef2ef}tr:last-child td{border:0}.pill{display:inline-block;background:var(--mint);color:var(--green-dark);padding:5px 8px;border-radius:20px;font-size:11px;font-weight:700}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.field{display:grid;gap:6px}.field label{font-size:12px;color:#5e6d64;font-weight:700}.field.full{grid-column:1/-1}.notice{padding:13px 15px;border-radius:10px;background:#f0f6f2;color:#53675b;font-size:12px;line-height:1.5;margin-top:18px}
+.page{display:none}.page.active{display:block}.mobile-menu{display:none}
+@media(max-width:850px){.sidebar{width:210px}.stats{grid-template-columns:repeat(2,1fr)}.grid-two{grid-template-columns:1fr}.content{padding:24px}}
+@media(max-width:620px){.shell{display:block}.sidebar{width:100%;padding:14px;gap:13px;border-right:0;border-bottom:1px solid var(--line)}.brand{padding:0}.nav-label,.sidebar-bottom{display:none}.nav{display:flex;overflow:auto}.nav button{white-space:nowrap;padding:9px}.nav button span{width:auto;margin-right:5px}.topbar{height:55px;padding:0 17px}.content{padding:22px 15px}.heading{display:block}.heading .btn{margin-top:15px}.stats{gap:9px}.stat{padding:14px}.stat strong{font-size:22px}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.toolbar{flex-direction:column}}
+</style>
+</head>
+<body>
+<div class="shell">
+<aside class="sidebar">
+  <div class="brand"><div class="brand-mark">V</div><div><strong>VendePronto</strong><small>PRO</small></div></div>
+  <div><div class="nav-label">MENU PRINCIPAL</div><nav class="nav">
+    <button class="active" data-page="dashboard"><span>⌂</span>Visão geral</button>
+    <button data-page="quotes"><span>▤</span>Orçamentos</button>
+    <button data-page="clients"><span>♙</span>Clientes</button>
+    <button data-page="services"><span>▣</span>Serviços</button>
+    <button data-page="customize"><span>✧</span>Personalização</button>
+    <button data-page="settings"><span>⚙</span>Configurações</button>
+  </nav></div>
+  <div class="sidebar-bottom">Ambiente de desenvolvimento<br><b>VendePronto PRO · MVP</b></div>
+</aside>
+<main class="main">
+<header class="topbar"><div class="crumb">Workspace / <b id="crumb">Visão geral</b></div><div class="user"><div class="avatar">VP</div><span>Minha empresa</span></div></header>
+<div class="content">
+<section class="page active" id="dashboard">
+  <div class="heading"><div><h1>Visão geral</h1><p>Acompanhe a movimentação do seu negócio em um só lugar.</p></div><button class="btn primary" onclick="showPage('quotes')">＋ Novo orçamento</button></div>
+  <div class="stats">
+    <div class="stat"><small>Orçamentos criados</small><strong id="statQuotes">0</strong><em>Todos os registros</em></div>
+    <div class="stat"><small>Clientes cadastrados</small><strong id="statClients">0</strong><em>Base de clientes</em></div>
+    <div class="stat"><small>Serviços em andamento</small><strong id="statActive">0</strong><em>Acompanhe o progresso</em></div>
+    <div class="stat"><small>Concluídos</small><strong id="statDone">0</strong><em>Serviços finalizados</em></div>
+  </div>
+  <div class="grid-two"><div class="panel"><h2>Orçamentos recentes</h2><div class="empty"><b>Nenhum orçamento por enquanto</b>Quando você criar orçamentos, eles aparecerão aqui.</div></div><div class="panel"><h2>Comece por aqui</h2><p class="muted">Organize seus clientes, registre serviços e acompanhe cada orçamento até a conclusão.</p><button class="btn secondary" onclick="showPage('clients')">＋ Cadastrar cliente</button></div></div>
+  <div class="notice">Prévia de desenvolvimento: esta interface ainda não está conectada ao banco de dados. Nenhum dado é enviado ou salvo neste protótipo.</div>
+</section>
+<section class="page" id="quotes">
+  <div class="heading"><div><h1>Orçamentos</h1><p>Crie e acompanhe propostas comerciais.</p></div><button class="btn primary" onclick="alert('O formulário completo de orçamento será implementado na próxima etapa.')">＋ Novo orçamento</button></div>
+  <div class="panel"><div class="toolbar"><input placeholder="Buscar por cliente ou orçamento..." disabled><select disabled><option>Todos os status</option></select></div><div class="empty"><b>Seus orçamentos ficarão aqui</b>Na próxima etapa vamos implementar criação, edição, itens, valores e exportação.</div></div>
+</section>
+<section class="page" id="clients">
+  <div class="heading"><div><h1>Clientes</h1><p>Centralize os dados dos seus clientes.</p></div><button class="btn primary" onclick="alert('Cadastro de clientes será ativado na próxima etapa.')">＋ Novo cliente</button></div>
+  <div class="panel"><div class="toolbar"><input placeholder="Buscar cliente..." disabled></div><div class="empty"><b>Sua carteira de clientes começa aqui</b>Cadastro, histórico de orçamentos e informações de contato serão implementados.</div></div>
+</section>
+<section class="page" id="services">
+  <div class="heading"><div><h1>Serviços</h1><p>Gerencie o andamento dos trabalhos contratados.</p></div><button class="btn primary" onclick="alert('Gestão de serviços será ativada na próxima etapa.')">＋ Novo serviço</button></div>
+  <div class="panel"><div class="empty"><b>Nenhum serviço registrado</b>Em breve você poderá acompanhar serviços pendentes, em andamento e concluídos.</div></div>
+</section>
+<section class="page" id="customize">
+  <div class="heading"><div><h1>Personalização</h1><p>Prepare a identidade dos seus documentos.</p></div></div>
+  <div class="panel"><h2>Identidade da empresa</h2><div class="form-grid"><div class="field"><label>Nome da empresa</label><input placeholder="Ex.: Minha Empresa" disabled></div><div class="field"><label>Cor principal</label><input type="color" value="#168653" disabled></div><div class="field full"><label>Logotipo</label><input type="file" disabled></div></div><div class="notice">Os campos são apenas uma prévia visual. A personalização funcional será construída em uma etapa posterior.</div></div>
+</section>
+<section class="page" id="settings">
+  <div class="heading"><div><h1>Configurações</h1><p>Preferências e dados da conta.</p></div></div>
+  <div class="panel"><h2>Conta e segurança</h2><p class="muted">A autenticação e as configurações de perfil serão conectadas ao Supabase depois da criação do projeto na nuvem.</p><div class="notice">Não insira senhas, chaves de API ou dados pessoais neste protótipo.</div></div>
+</section>
+</div>
+</main>
+</div>
+<script>
+const labels={dashboard:"Visão geral",quotes:"Orçamentos",clients:"Clientes",services:"Serviços",customize:"Personalização",settings:"Configurações"};
+function showPage(id){document.querySelectorAll(".page").forEach(p=>p.classList.toggle("active",p.id===id));document.querySelectorAll(".nav button").forEach(b=>b.classList.toggle("active",b.dataset.page===id));document.getElementById("crumb").textContent=labels[id]||"VendePronto PRO";window.scrollTo(0,0)}
+document.querySelectorAll(".nav button").forEach(b=>b.addEventListener("click",()=>showPage(b.dataset.page)));
+</script>
+</body>
+</html>
