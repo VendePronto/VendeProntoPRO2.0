@@ -2,83 +2,236 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f5f8f6">
 <title>VendePronto PRO</title>
 <style>
-:root{--green:#168653;--green-dark:#106b41;--mint:#eaf6ef;--bg:#f5f8f6;--ink:#183329;--muted:#718078;--line:#e3ebe6;--white:#fff;--red:#b84b4b}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:Inter,Arial,sans-serif;color:var(--ink)}
-button,input,select,textarea{font:inherit}button{cursor:pointer}
-.shell{display:flex;min-height:100vh}.sidebar{width:248px;background:#fff;border-right:1px solid var(--line);padding:24px 16px;display:flex;flex-direction:column;gap:24px}
-.brand{display:flex;align-items:center;gap:10px;padding:0 8px}.brand-mark{width:38px;height:38px;border-radius:12px;background:var(--green);color:#fff;display:grid;place-items:center;font-weight:800}.brand strong{font-size:17px}.brand small{display:block;color:var(--green);font-weight:700;font-size:10px;letter-spacing:1.5px;margin-top:3px}
-.nav-label{font-size:10px;color:#9aa79f;font-weight:800;letter-spacing:1.3px;padding:0 10px;margin-bottom:7px}.nav{display:grid;gap:5px}.nav button{border:0;background:transparent;text-align:left;padding:11px 12px;border-radius:10px;color:#53645a;font-weight:600}.nav button:hover,.nav button.active{background:var(--mint);color:var(--green-dark)}.nav button span{display:inline-block;width:25px}
-.sidebar-bottom{margin-top:auto;border-top:1px solid var(--line);padding:16px 8px 0;color:var(--muted);font-size:12px;line-height:1.5}
-.main{flex:1;min-width:0}.topbar{height:72px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 34px}.crumb{color:var(--muted);font-size:13px}.user{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:700}.avatar{width:34px;height:34px;border-radius:50%;background:var(--mint);color:var(--green);display:grid;place-items:center}
-.content{max-width:1180px;padding:34px;margin:auto}.heading{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;margin-bottom:26px}.heading h1{font-size:27px;margin:0 0 7px}.heading p{margin:0;color:var(--muted);font-size:14px}.btn{border:0;border-radius:9px;padding:11px 15px;font-weight:700}.primary{background:var(--green);color:white}.primary:hover{background:var(--green-dark)}.secondary{background:#fff;border:1px solid var(--line);color:var(--ink)}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin-bottom:22px}.stat,.panel{background:#fff;border:1px solid var(--line);border-radius:14px;padding:19px}.stat small{color:var(--muted);font-weight:600}.stat strong{display:block;font-size:26px;margin-top:10px}.stat em{font-style:normal;color:var(--green);font-size:12px}
-.panel h2{font-size:16px;margin:0 0 16px}.panel p.muted{font-size:13px;color:var(--muted);line-height:1.6}.grid-two{display:grid;grid-template-columns:1.3fr 1fr;gap:16px}.empty{border:1px dashed #d5e2d9;border-radius:12px;padding:28px;text-align:center;color:var(--muted);font-size:13px}.empty b{display:block;color:var(--ink);font-size:14px;margin-bottom:6px}
-.toolbar{display:flex;gap:10px;margin-bottom:15px}.toolbar input,.field input,.field select,.field textarea{width:100%;border:1px solid var(--line);border-radius:9px;padding:11px 12px;background:#fff;outline:none}.toolbar input:focus,.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--green)}
-table{width:100%;border-collapse:collapse;font-size:13px}th{text-align:left;color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.5px;padding:12px 9px;border-bottom:1px solid var(--line)}td{padding:14px 9px;border-bottom:1px solid #eef2ef}tr:last-child td{border:0}.pill{display:inline-block;background:var(--mint);color:var(--green-dark);padding:5px 8px;border-radius:20px;font-size:11px;font-weight:700}
-.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.field{display:grid;gap:6px}.field label{font-size:12px;color:#5e6d64;font-weight:700}.field.full{grid-column:1/-1}.notice{padding:13px 15px;border-radius:10px;background:#f0f6f2;color:#53675b;font-size:12px;line-height:1.5;margin-top:18px}
-.page{display:none}.page.active{display:block}.mobile-menu{display:none}
-@media(max-width:850px){.sidebar{width:210px}.stats{grid-template-columns:repeat(2,1fr)}.grid-two{grid-template-columns:1fr}.content{padding:24px}}
-@media(max-width:620px){.shell{display:block}.sidebar{width:100%;padding:14px;gap:13px;border-right:0;border-bottom:1px solid var(--line)}.brand{padding:0}.nav-label,.sidebar-bottom{display:none}.nav{display:flex;overflow:auto}.nav button{white-space:nowrap;padding:9px}.nav button span{width:auto;margin-right:5px}.topbar{height:55px;padding:0 17px}.content{padding:22px 15px}.heading{display:block}.heading .btn{margin-top:15px}.stats{gap:9px}.stat{padding:14px}.stat strong{font-size:22px}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.toolbar{flex-direction:column}}
+:root{--g:#168653;--gd:#106b41;--mint:#eaf6ef;--bg:#f5f8f6;--ink:#19352a;--muted:#718078;--line:#e3ebe6;--white:#fff;--danger:#b84343;--shadow:0 12px 35px #173c2810}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}button,input,textarea,select{font:inherit}button{cursor:pointer}
+.app{display:flex;min-height:100vh}.side{width:245px;flex-shrink:0;background:#fff;border-right:1px solid var(--line);padding:24px 15px;display:flex;flex-direction:column}.brand{display:flex;gap:10px;align-items:center;padding:0 8px 27px}.logo{height:39px;width:39px;border-radius:12px;background:var(--g);color:white;display:grid;place-items:center;font-weight:900;font-size:20px}.brand b{font-size:17px}.brand small{display:block;color:var(--g);font-weight:800;font-size:10px;letter-spacing:1.7px;margin-top:2px}.navtitle{font-size:10px;letter-spacing:1.4px;color:#9aa79f;font-weight:800;padding:0 10px 9px}.nav{display:grid;gap:4px}.nav button{border:0;background:none;text-align:left;padding:11px 12px;border-radius:10px;color:#596a60;font-weight:650;font-size:13px}.nav button:hover,.nav button.active{background:var(--mint);color:var(--gd)}.nav button span{display:inline-block;width:27px}.sidefoot{margin-top:auto;border-top:1px solid var(--line);padding:16px 8px 0;color:var(--muted);font-size:11px;line-height:1.6}
+.main{flex:1;min-width:0}.top{height:68px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 32px}.crumb{font-size:13px;color:var(--muted)}.profile{display:flex;align-items:center;gap:9px;font-size:12px;font-weight:700}.avatar{width:34px;height:34px;border-radius:50%;background:var(--mint);color:var(--g);display:grid;place-items:center}
+.wrap{max-width:1180px;margin:auto;padding:32px}.page{display:none}.page.active{display:block}.head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:23px}.head h1{font-size:27px;margin:0 0 6px;letter-spacing:-.5px}.head p{margin:0;color:var(--muted);font-size:13px}.btn{border:0;border-radius:9px;padding:11px 15px;font-weight:750;font-size:13px}.primary{background:var(--g);color:#fff}.primary:hover{background:var(--gd)}.outline{background:#fff;border:1px solid var(--line);color:var(--ink)}.soft{background:var(--mint);color:var(--gd)}.danger{background:#fff1f1;color:var(--danger)}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:18px}.metric,.panel{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:var(--shadow)}.metric small{font-size:12px;color:var(--muted);font-weight:650}.metric strong{display:block;font-size:25px;margin-top:8px}.panel h2{font-size:15px;margin:0 0 14px}.muted{color:var(--muted);font-size:13px;line-height:1.6}.notice{background:#f0f6f2;border-radius:10px;padding:12px 14px;font-size:11px;color:#617268;line-height:1.55;margin-top:16px}
+.toolbar{display:flex;gap:10px;margin-bottom:14px}.search{position:relative;flex:1}.search input{width:100%;padding:11px 13px 11px 37px;border:1px solid var(--line);border-radius:9px;background:white;outline:none}.search:before{content:"⌕";position:absolute;left:13px;top:5px;font-size:23px;color:#84938a}.search input:focus,.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--g);box-shadow:0 0 0 3px #16865315}.filter{border:1px solid var(--line);background:#fff;border-radius:9px;padding:0 12px;color:#506157}
+.tablebox{overflow:auto}table{width:100%;border-collapse:collapse;min-width:600px}th{text-align:left;color:#829087;font-size:10px;text-transform:uppercase;letter-spacing:.7px;padding:12px 10px;border-bottom:1px solid var(--line)}td{padding:13px 10px;border-bottom:1px solid #edf2ee;font-size:12px}tbody tr:last-child td{border-bottom:0}.person{display:flex;align-items:center;gap:9px}.initial{height:33px;width:33px;flex-shrink:0;border-radius:10px;background:var(--mint);color:var(--gd);display:grid;place-items:center;font-weight:800}.person b{display:block;font-size:12px}.person small{color:var(--muted);font-size:10px}.actions{display:flex;gap:6px}.iconbtn{border:1px solid var(--line);background:#fff;border-radius:7px;padding:6px 8px;color:#52645a;font-size:11px}.empty{text-align:center;padding:42px 18px;color:var(--muted);font-size:12px}.empty .symbol{font-size:28px;margin-bottom:9px}.empty b{display:block;color:var(--ink);font-size:14px;margin-bottom:5px}
+.modalback{position:fixed;inset:0;background:#10271db0;display:none;align-items:center;justify-content:center;padding:16px;z-index:5}.modalback.show{display:flex}.modal{background:#fff;border-radius:16px;width:min(620px,100%);max-height:92vh;overflow:auto;box-shadow:0 25px 80px #0003}.modalhead{padding:20px 22px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}.modalhead h2{font-size:18px;margin:0}.close{border:0;background:#f2f5f3;border-radius:8px;width:32px;height:32px;font-size:18px;color:#607067}.modalbody{padding:21px 22px}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:13px}.field{display:grid;gap:6px}.field.full{grid-column:1/-1}.field label{font-size:11px;font-weight:750;color:#52645a}.field input,.field textarea,.field select{width:100%;border:1px solid var(--line);border-radius:9px;padding:11px 12px;outline:none;font-size:13px}.field textarea{min-height:75px;resize:vertical}.hint{font-size:10px;color:var(--muted)}.modalfoot{display:flex;justify-content:flex-end;gap:8px;padding:15px 22px;border-top:1px solid var(--line)}.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#183c2b;color:white;padding:11px 16px;border-radius:9px;font-size:12px;display:none;z-index:8;box-shadow:var(--shadow)}.toast.show{display:block}
+.quoteitems{width:100%;min-width:520px}.quoteitems input{width:100%;border:1px solid var(--line);border-radius:7px;padding:9px;font-size:12px}.quoteitems td{vertical-align:middle}.totals{margin-left:auto;max-width:280px;display:grid;gap:9px;padding-top:14px}.totalrow{display:flex;justify-content:space-between;font-size:13px}.totalrow.final{font-size:18px;font-weight:850;border-top:1px solid var(--line);padding-top:10px;color:var(--gd)}.status{display:inline-block;padding:5px 8px;border-radius:20px;background:#edf5ef;color:#276b45;font-size:10px;font-weight:800}.status.pending{background:#fff5df;color:#91651a}.status.approved{background:#eaf2ff;color:#315d9a}.status.cancelled{background:#fff0f0;color:#a63f3f}.quote-actions{display:flex;gap:6px;flex-wrap:wrap}.detailrow{display:grid;grid-template-columns:130px 1fr;gap:12px;padding:10px 0;border-bottom:1px solid #edf2ee;font-size:12px}.detailrow:last-child{border:0}.detailrow span{color:var(--muted)}
+@media print{body{background:#fff}.side,.top,.head .btn,.toolbar,.actions,.notice,.no-print{display:none!important}.main{width:100%}.wrap{padding:0;max-width:none}.page{display:none!important}#quotePrint{display:block!important}.panel{box-shadow:none;border:0}}
+@media(max-width:800px){.side{width:205px}.wrap{padding:23px}.cards{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:620px){.app{display:block}.side{width:100%;padding:12px 12px 8px;border-right:0;border-bottom:1px solid var(--line)}.brand{padding:0 4px 12px}.navtitle,.sidefoot{display:none}.nav{display:flex;overflow-x:auto;gap:3px;padding-bottom:2px}.nav button{white-space:nowrap;padding:9px 10px;font-size:11px}.nav button span{width:auto;margin-right:5px}.top{height:52px;padding:0 15px}.wrap{padding:21px 14px}.head{display:block}.head .btn{margin-top:14px;width:100%}.head h1{font-size:24px}.cards{gap:8px}.metric{padding:12px}.metric small{font-size:10px}.metric strong{font-size:21px}.toolbar{flex-direction:column}.filter{padding:11px}.formgrid{grid-template-columns:1fr}.field.full{grid-column:auto}.modalback{align-items:flex-end;padding:0}.modal{border-radius:17px 17px 0 0;max-height:94vh}.modalbody{padding:17px}.modalhead,.modalfoot{padding:15px 17px}}
 </style>
 </head>
 <body>
-<div class="shell">
-<aside class="sidebar">
-  <div class="brand"><div class="brand-mark">V</div><div><strong>VendePronto</strong><small>PRO</small></div></div>
-  <div><div class="nav-label">MENU PRINCIPAL</div><nav class="nav">
-    <button class="active" data-page="dashboard"><span>⌂</span>Visão geral</button>
-    <button data-page="quotes"><span>▤</span>Orçamentos</button>
-    <button data-page="clients"><span>♙</span>Clientes</button>
-    <button data-page="services"><span>▣</span>Serviços</button>
-    <button data-page="customize"><span>✧</span>Personalização</button>
-    <button data-page="settings"><span>⚙</span>Configurações</button>
-  </nav></div>
-  <div class="sidebar-bottom">Ambiente de desenvolvimento<br><b>VendePronto PRO · MVP</b></div>
+<div class="app">
+<aside class="side">
+ <div class="brand"><div class="logo">V</div><div><b>VendePronto</b><small>PRO</small></div></div>
+ <div class="navtitle">MENU PRINCIPAL</div>
+ <nav class="nav">
+  <button data-page="dashboard"><span>⌂</span>Visão geral</button>
+  <button data-page="clients" class="active"><span>♙</span>Clientes</button>
+  <button data-page="quotes"><span>▤</span>Orçamentos</button>
+  <button data-page="services"><span>▣</span>Serviços</button>
+  <button data-page="receivables"><span>◷</span>Contas a receber</button>
+  <button data-page="reports"><span>▥</span>Relatórios</button>
+  <button data-page="customize"><span>✧</span>Personalização</button>
+  <button data-page="settings"><span>⚙</span>Configurações</button>
+ </nav>
+ <div class="sidefoot">Ambiente de desenvolvimento<br><b>VendePronto PRO · Clientes e orçamentos</b></div>
 </aside>
 <main class="main">
-<header class="topbar"><div class="crumb">Workspace / <b id="crumb">Visão geral</b></div><div class="user"><div class="avatar">VP</div><span>Minha empresa</span></div></header>
-<div class="content">
-<section class="page active" id="dashboard">
-  <div class="heading"><div><h1>Visão geral</h1><p>Acompanhe a movimentação do seu negócio em um só lugar.</p></div><button class="btn primary" onclick="showPage('quotes')">＋ Novo orçamento</button></div>
-  <div class="stats">
-    <div class="stat"><small>Orçamentos criados</small><strong id="statQuotes">0</strong><em>Todos os registros</em></div>
-    <div class="stat"><small>Clientes cadastrados</small><strong id="statClients">0</strong><em>Base de clientes</em></div>
-    <div class="stat"><small>Serviços em andamento</small><strong id="statActive">0</strong><em>Acompanhe o progresso</em></div>
-    <div class="stat"><small>Concluídos</small><strong id="statDone">0</strong><em>Serviços finalizados</em></div>
-  </div>
-  <div class="grid-two"><div class="panel"><h2>Orçamentos recentes</h2><div class="empty"><b>Nenhum orçamento por enquanto</b>Quando você criar orçamentos, eles aparecerão aqui.</div></div><div class="panel"><h2>Comece por aqui</h2><p class="muted">Organize seus clientes, registre serviços e acompanhe cada orçamento até a conclusão.</p><button class="btn secondary" onclick="showPage('clients')">＋ Cadastrar cliente</button></div></div>
-  <div class="notice">Prévia de desenvolvimento: esta interface ainda não está conectada ao banco de dados. Nenhum dado é enviado ou salvo neste protótipo.</div>
-</section>
-<section class="page" id="quotes">
-  <div class="heading"><div><h1>Orçamentos</h1><p>Crie e acompanhe propostas comerciais.</p></div><button class="btn primary" onclick="alert('O formulário completo de orçamento será implementado na próxima etapa.')">＋ Novo orçamento</button></div>
-  <div class="panel"><div class="toolbar"><input placeholder="Buscar por cliente ou orçamento..." disabled><select disabled><option>Todos os status</option></select></div><div class="empty"><b>Seus orçamentos ficarão aqui</b>Na próxima etapa vamos implementar criação, edição, itens, valores e exportação.</div></div>
-</section>
-<section class="page" id="clients">
-  <div class="heading"><div><h1>Clientes</h1><p>Centralize os dados dos seus clientes.</p></div><button class="btn primary" onclick="alert('Cadastro de clientes será ativado na próxima etapa.')">＋ Novo cliente</button></div>
-  <div class="panel"><div class="toolbar"><input placeholder="Buscar cliente..." disabled></div><div class="empty"><b>Sua carteira de clientes começa aqui</b>Cadastro, histórico de orçamentos e informações de contato serão implementados.</div></div>
-</section>
-<section class="page" id="services">
-  <div class="heading"><div><h1>Serviços</h1><p>Gerencie o andamento dos trabalhos contratados.</p></div><button class="btn primary" onclick="alert('Gestão de serviços será ativada na próxima etapa.')">＋ Novo serviço</button></div>
-  <div class="panel"><div class="empty"><b>Nenhum serviço registrado</b>Em breve você poderá acompanhar serviços pendentes, em andamento e concluídos.</div></div>
-</section>
-<section class="page" id="customize">
-  <div class="heading"><div><h1>Personalização</h1><p>Prepare a identidade dos seus documentos.</p></div></div>
-  <div class="panel"><h2>Identidade da empresa</h2><div class="form-grid"><div class="field"><label>Nome da empresa</label><input placeholder="Ex.: Minha Empresa" disabled></div><div class="field"><label>Cor principal</label><input type="color" value="#168653" disabled></div><div class="field full"><label>Logotipo</label><input type="file" disabled></div></div><div class="notice">Os campos são apenas uma prévia visual. A personalização funcional será construída em uma etapa posterior.</div></div>
-</section>
-<section class="page" id="settings">
-  <div class="heading"><div><h1>Configurações</h1><p>Preferências e dados da conta.</p></div></div>
-  <div class="panel"><h2>Conta e segurança</h2><p class="muted">A autenticação e as configurações de perfil serão conectadas ao Supabase depois da criação do projeto na nuvem.</p><div class="notice">Não insira senhas, chaves de API ou dados pessoais neste protótipo.</div></div>
-</section>
-</div>
+ <header class="top"><div class="crumb">VendePronto PRO / <b id="crumb">Clientes</b></div><div class="profile"><div class="avatar">VP</div><span>Minha empresa</span></div></header>
+ <div class="wrap">
+  <section class="page" id="dashboard">
+   <div class="head"><div><h1>Visão geral</h1><p>Resumo da organização do seu negócio.</p></div></div>
+   <div class="cards"><div class="metric"><small>Clientes cadastrados</small><strong id="dashClients">0</strong></div><div class="metric"><small>Orçamentos</small><strong id="dashQuotes">0</strong></div><div class="metric"><small>Serviços ativos</small><strong>—</strong></div></div>
+   <div class="panel"><h2>Bem-vindo ao VendePronto PRO</h2><p class="muted">Cadastre e organize seus clientes, crie orçamentos vinculados a eles e acompanhe as propostas em um só lugar. Os módulos de clientes e orçamentos já estão disponíveis nesta versão.</p><button class="btn primary" onclick="openNew()">＋ Cadastrar cliente</button></div>
+  </section>
+  <section class="page active" id="clients">
+   <div class="head"><div><h1>Clientes</h1><p>Cadastre e organize os contatos do seu negócio.</p></div><button class="btn primary" onclick="openNew()">＋ Novo cliente</button></div>
+   <div class="cards"><div class="metric"><small>Total de clientes</small><strong id="total">0</strong></div><div class="metric"><small>Com telefone</small><strong id="withPhone">0</strong></div><div class="metric"><small>Com e-mail</small><strong id="withEmail">0</strong></div></div>
+   <div class="panel"><div class="toolbar"><div class="search"><input id="search" placeholder="Buscar por nome, telefone, e-mail ou documento..." oninput="render()"></div><select id="sort" class="filter" onchange="render()"><option value="new">Mais recentes</option><option value="az">Nome: A–Z</option><option value="za">Nome: Z–A</option></select></div>
+    <div class="tablebox"><table><thead><tr><th>Cliente</th><th>Telefone</th><th>E-mail</th><th>Cadastro</th><th>Ações</th></tr></thead><tbody id="clientRows"></tbody></table></div>
+    <div id="empty" class="empty"><div class="symbol">♙</div><b>Nenhum cliente cadastrado</b>Adicione seu primeiro cliente para começar a organizar sua carteira.</div>
+   </div>
+   <div class="notice"><b>Protótipo de desenvolvimento:</b> por enquanto, os dados ficam salvos apenas neste navegador. Ainda não há sincronização em nuvem nem login. Use informações fictícias durante os testes. O banco Supabase será conectado em uma próxima etapa.</div>
+  </section>
+  <section class="page" id="quotes">
+   <div class="head"><div><h1>Orçamentos</h1><p>Crie propostas, adicione itens e acompanhe cada orçamento.</p></div><button class="btn primary" onclick="openQuote()">＋ Novo orçamento</button></div>
+   <div class="cards"><div class="metric"><small>Total de orçamentos</small><strong id="quoteCount">0</strong></div><div class="metric"><small>Em aberto</small><strong id="quoteOpen">0</strong></div><div class="metric"><small>Valor aprovado</small><strong id="quoteApproved">R$ 0,00</strong></div></div>
+   <div class="panel"><div class="toolbar"><div class="search"><input id="quoteSearch" placeholder="Buscar por número ou cliente..." oninput="renderQuotes()"></div><select id="quoteFilter" class="filter" onchange="renderQuotes()"><option value="all">Todos os status</option><option value="pending">Em aberto</option><option value="approved">Aprovados</option><option value="cancelled">Cancelados</option></select></div>
+    <div class="tablebox"><table><thead><tr><th>Orçamento</th><th>Cliente</th><th>Data</th><th>Validade</th><th>Total</th><th>Status</th><th>Ações</th></tr></thead><tbody id="quoteRows"></tbody></table></div>
+    <div id="quoteEmpty" class="empty"><div class="symbol">▤</div><b>Nenhum orçamento criado</b>Crie seu primeiro orçamento e vincule-o a um cliente.</div>
+   </div>
+   <div class="notice">Os valores são apenas registros administrativos. O sistema não recebe pagamentos nem movimenta dinheiro. Os dados ficam salvos neste navegador durante esta fase de testes.</div>
+  </section>
+  <section class="page" id="services"><div class="head"><div><h1>Serviços</h1><p>Acompanhe o andamento dos trabalhos.</p></div></div><div class="panel"><div class="empty"><b>Próximo módulo</b>Gestão de serviços e status será desenvolvida em seguida.</div></div></section>
+  <section class="page" id="receivables"><div class="head"><div><h1>Contas a receber</h1><p>Registre valores previstos e recebimentos informados manualmente.</p></div></div><div class="panel"><div class="empty"><b>Próximo módulo</b>O sistema não movimentará dinheiro. Será apenas um controle de registros.</div></div></section>
+  <section class="page" id="reports"><div class="head"><div><h1>Relatórios</h1><p>Indicadores para acompanhar seu negócio.</p></div></div><div class="panel"><div class="empty"><b>Próximo módulo</b>Os relatórios usarão dados registrados nos outros módulos.</div></div></section>
+  <section class="page" id="customize"><div class="head"><div><h1>Personalização</h1><p>Identidade visual dos seus documentos.</p></div></div><div class="panel"><div class="empty"><b>Próximo módulo</b>Nome da empresa, logotipo e cores personalizadas.</div></div></section>
+  <section class="page" id="settings"><div class="head"><div><h1>Configurações</h1><p>Conta, preferências e segurança.</p></div></div><div class="panel"><div class="empty"><b>Conexão em nuvem pendente</b>Autenticação e banco de dados serão ligados ao Supabase após a configuração do projeto.</div></div></section>
+ </div>
 </main>
 </div>
+<div class="modalback" id="modal">
+ <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modalhead"><h2 id="modalTitle">Novo cliente</h2><button class="close" onclick="closeModal()" aria-label="Fechar">×</button></div>
+  <form id="clientForm">
+   <div class="modalbody"><div class="formgrid">
+    <div class="field full"><label for="name">Nome completo ou razão social *</label><input id="name" required maxlength="120" placeholder="Ex.: Maria Oliveira"></div>
+    <div class="field"><label for="doc">CPF/CNPJ (opcional)</label><input id="doc" maxlength="24" placeholder="Somente se necessário"></div>
+    <div class="field"><label for="phone">Telefone / WhatsApp</label><input id="phone" maxlength="30" placeholder="(00) 00000-0000"></div>
+    <div class="field full"><label for="email">E-mail</label><input id="email" type="email" maxlength="150" placeholder="cliente@email.com"></div>
+    <div class="field full"><label for="address">Endereço</label><input id="address" maxlength="180" placeholder="Rua, número, cidade (opcional)"></div>
+    <div class="field full"><label for="notes">Observações</label><textarea id="notes" maxlength="1000" placeholder="Informações úteis sobre o cliente..."></textarea><span class="hint">Evite inserir informações sensíveis que não sejam necessárias.</span></div>
+   </div></div>
+   <div class="modalfoot"><button type="button" class="btn outline" onclick="closeModal()">Cancelar</button><button class="btn primary" type="submit">Salvar cliente</button></div>
+  </form>
+ </div>
+</div>
+<div class="modalback" id="quoteModal">
+ <div class="modal" role="dialog" aria-modal="true" aria-labelledby="quoteModalTitle">
+  <div class="modalhead"><h2 id="quoteModalTitle">Novo orçamento</h2><button class="close" onclick="closeQuote()" aria-label="Fechar">×</button></div>
+  <form id="quoteForm">
+   <div class="modalbody">
+    <div class="formgrid">
+     <div class="field full"><label for="qClient">Cliente *</label><select id="qClient" required></select><span class="hint" id="clientHint">Selecione um cliente já cadastrado.</span></div>
+     <div class="field"><label for="qDate">Data *</label><input id="qDate" type="date" required></div>
+     <div class="field"><label for="qValidity">Válido até</label><input id="qValidity" type="date"></div>
+     <div class="field full"><label>Itens do orçamento</label>
+      <div class="tablebox"><table class="quoteitems"><thead><tr><th>Descrição</th><th>Qtd.</th><th>Valor unitário (R$)</th><th></th></tr></thead><tbody id="quoteItemRows"></tbody></table></div>
+      <button type="button" class="btn soft" style="margin-top:10px" onclick="addQuoteItem()">＋ Adicionar item</button>
+     </div>
+     <div class="field"><label for="qDiscount">Desconto (R$)</label><input id="qDiscount" type="number" min="0" step="0.01" value="0" oninput="calcQuote()"></div>
+     <div class="field"><label for="qStatus">Status</label><select id="qStatus"><option value="pending">Em aberto</option><option value="approved">Aprovado</option><option value="cancelled">Cancelado</option></select></div>
+     <div class="field full"><label for="qNotes">Observações / condições</label><textarea id="qNotes" maxlength="1000" placeholder="Prazo de execução, condições e outras informações..."></textarea></div>
+    </div>
+    <div class="totals"><div class="totalrow"><span>Subtotal</span><b id="qSubtotal">R$ 0,00</b></div><div class="totalrow"><span>Desconto</span><b id="qDiscountLabel">R$ 0,00</b></div><div class="totalrow final"><span>Total</span><b id="qTotal">R$ 0,00</b></div></div>
+   </div>
+   <div class="modalfoot"><button type="button" class="btn outline" onclick="closeQuote()">Cancelar</button><button class="btn primary" type="submit">Salvar orçamento</button></div>
+  </form>
+ </div>
+</div>
+<div class="modalback" id="quoteViewModal">
+ <div class="modal" role="dialog" aria-modal="true" aria-labelledby="quoteViewTitle">
+  <div class="modalhead"><h2 id="quoteViewTitle">Orçamento</h2><button class="close" onclick="closeQuoteView()" aria-label="Fechar">×</button></div>
+  <div class="modalbody" id="quoteViewBody"></div>
+  <div class="modalfoot"><button class="btn outline" onclick="closeQuoteView()">Fechar</button><button class="btn primary" onclick="printQuote()">Imprimir / Salvar PDF</button></div>
+ </div>
+</div>
+<div id="quotePrint" style="display:none"></div>
+<div class="toast" id="toast"></div>
 <script>
-const labels={dashboard:"Visão geral",quotes:"Orçamentos",clients:"Clientes",services:"Serviços",customize:"Personalização",settings:"Configurações"};
-function showPage(id){document.querySelectorAll(".page").forEach(p=>p.classList.toggle("active",p.id===id));document.querySelectorAll(".nav button").forEach(b=>b.classList.toggle("active",b.dataset.page===id));document.getElementById("crumb").textContent=labels[id]||"VendePronto PRO";window.scrollTo(0,0)}
+const KEY="vendepronto_pro_clients_v1";
+let clients=load(),editing=null;
+function load(){try{return JSON.parse(localStorage.getItem(KEY)||"[]")}catch(e){return []}}
+function persist(){localStorage.setItem(KEY,JSON.stringify(clients))}
+function esc(v=""){return String(v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function initials(n){return n.trim().split(/\s+/).slice(0,2).map(x=>x[0]||"").join("").toUpperCase()}
+function dateLabel(d){return new Intl.DateTimeFormat("pt-BR").format(new Date(d))}
+function toast(msg){let t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),2300)}
+function render(){
+ const q=document.getElementById("search").value.toLocaleLowerCase("pt-BR");
+ let arr=clients.filter(c=>[c.name,c.doc,c.phone,c.email].join(" ").toLocaleLowerCase("pt-BR").includes(q));
+ const sort=document.getElementById("sort").value;
+ arr.sort((a,b)=>sort==="az"?a.name.localeCompare(b.name,"pt-BR"):sort==="za"?b.name.localeCompare(a.name,"pt-BR"):b.createdAt-a.createdAt);
+ document.getElementById("total").textContent=clients.length;
+ document.getElementById("withPhone").textContent=clients.filter(c=>c.phone).length;
+ document.getElementById("withEmail").textContent=clients.filter(c=>c.email).length;
+ document.getElementById("dashClients").textContent=clients.length;
+ const tbody=document.getElementById("clientRows");
+ tbody.innerHTML=arr.map(c=>`<tr><td><div class="person"><div class="initial">${esc(initials(c.name))}</div><div><b>${esc(c.name)}</b><small>${esc(c.doc||"Cliente")}</small></div></div></td><td>${esc(c.phone||"—")}</td><td>${esc(c.email||"—")}</td><td>${dateLabel(c.createdAt)}</td><td><div class="actions"><button class="iconbtn" onclick="viewClient('${c.id}')">Ver</button><button class="iconbtn" onclick="editClient('${c.id}')">Editar</button><button class="iconbtn" onclick="deleteClient('${c.id}')">Excluir</button></div></td></tr>`).join("");
+ document.getElementById("empty").style.display=arr.length?"none":"block";
+ tbody.parentElement.style.display=arr.length?"table":"none";
+}
+function openNew(){editing=null;document.getElementById("clientForm").reset();document.getElementById("modalTitle").textContent="Novo cliente";document.querySelector("#clientForm button[type=submit]").textContent="Salvar cliente";document.getElementById("modal").classList.add("show");setTimeout(()=>document.getElementById("name").focus(),80)}
+function closeModal(){document.getElementById("modal").classList.remove("show")}
+function editClient(id){const c=clients.find(x=>x.id===id);if(!c)return;editing=id;for(const k of ["name","doc","phone","email","address","notes"])document.getElementById(k).value=c[k]||"";document.getElementById("modalTitle").textContent="Editar cliente";document.querySelector("#clientForm button[type=submit]").textContent="Salvar alterações";document.getElementById("modal").classList.add("show")}
+function viewClient(id){const c=clients.find(x=>x.id===id);if(!c)return;alert("CLIENTE\\n\\n"+c.name+"\\nTelefone: "+(c.phone||"—")+"\\nE-mail: "+(c.email||"—")+"\\nDocumento: "+(c.doc||"—")+"\\nEndereço: "+(c.address||"—")+"\\nObservações: "+(c.notes||"—"))}
+function deleteClient(id){const c=clients.find(x=>x.id===id);if(!c)return;if(confirm(`Excluir o cadastro de ${c.name}? Esta ação não poderá ser desfeita.`)){clients=clients.filter(x=>x.id!==id);persist();render();toast("Cliente excluído.")}}
+document.getElementById("clientForm").addEventListener("submit",e=>{e.preventDefault();const data={};for(const k of ["name","doc","phone","email","address","notes"])data[k]=document.getElementById(k).value.trim();if(!data.name)return; if(editing){const i=clients.findIndex(c=>c.id===editing);if(i>=0)clients[i]={...clients[i],...data,updatedAt:Date.now()};toast("Cadastro atualizado.")}else{clients.push({id:crypto.randomUUID?crypto.randomUUID():String(Date.now()),...data,createdAt:Date.now()});toast("Cliente cadastrado.")}persist();render();closeModal()});
 document.querySelectorAll(".nav button").forEach(b=>b.addEventListener("click",()=>showPage(b.dataset.page)));
+function showPage(id){document.querySelectorAll(".page").forEach(p=>p.classList.toggle("active",p.id===id));document.querySelectorAll(".nav button").forEach(b=>b.classList.toggle("active",b.dataset.page===id));document.getElementById("crumb").textContent=bLabel(id);window.scrollTo(0,0)}
+function bLabel(id){const b=document.querySelector(`[data-page="${id}"]`);return b?b.textContent.trim():"VendePronto PRO"}
+document.getElementById("modal").addEventListener("click",e=>{if(e.target.id==="modal")closeModal()});
+
+const QKEY="vendepronto_pro_quotes_v1";
+let quotes=loadQuotes(),editingQuote=null,quoteItems=[];
+function loadQuotes(){try{return JSON.parse(localStorage.getItem(QKEY)||"[]")}catch(e){return []}}
+function persistQuotes(){localStorage.setItem(QKEY,JSON.stringify(quotes))}
+function money(v){return Number(v||0).toLocaleString("pt-BR",{style:"currency",currency:"BRL"})}
+function statusLabel(v){return v==="approved"?"Aprovado":v==="cancelled"?"Cancelado":"Em aberto"}
+function statusClass(v){return v==="approved"?"approved":v==="cancelled"?"cancelled":"pending"}
+function renderQuotes(){
+ const q=(document.getElementById("quoteSearch")?.value||"").toLocaleLowerCase("pt-BR");
+ const f=document.getElementById("quoteFilter")?.value||"all";
+ let arr=quotes.filter(x=>(f==="all"||x.status===f)&&(`${x.number} ${clientName(x.clientId)}`).toLocaleLowerCase("pt-BR").includes(q));
+ arr.sort((a,b)=>b.createdAt-a.createdAt);
+ document.getElementById("quoteCount").textContent=quotes.length;
+ document.getElementById("dashQuotes").textContent=quotes.length;
+ document.getElementById("quoteOpen").textContent=quotes.filter(x=>x.status==="pending").length;
+ document.getElementById("quoteApproved").textContent=money(quotes.filter(x=>x.status==="approved").reduce((n,x)=>n+x.total,0));
+ document.getElementById("quoteRows").innerHTML=arr.map(x=>`<tr><td><b>${esc(x.number)}</b></td><td>${esc(clientName(x.clientId))}</td><td>${dateLabel(x.date+"T12:00:00")}</td><td>${x.validity?dateLabel(x.validity+"T12:00:00"):"—"}</td><td><b>${money(x.total)}</b></td><td><span class="status ${statusClass(x.status)}">${statusLabel(x.status)}</span></td><td><div class="quote-actions"><button class="iconbtn" onclick="viewQuote('${x.id}')">Ver</button><button class="iconbtn" onclick="editQuote('${x.id}')">Editar</button><button class="iconbtn" onclick="deleteQuote('${x.id}')">Excluir</button></div></td></tr>`).join("");
+ document.getElementById("quoteEmpty").style.display=arr.length?"none":"block";
+ document.getElementById("quoteRows").parentElement.style.display=arr.length?"table":"none";
+}
+function clientName(id){return clients.find(c=>c.id===id)?.name||"Cliente removido"}
+function dateInputToday(){const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`}
+function fillClientOptions(selected=""){
+ const el=document.getElementById("qClient");
+ el.innerHTML='<option value="">Selecione um cliente</option>'+clients.slice().sort((a,b)=>a.name.localeCompare(b.name,"pt-BR")).map(c=>`<option value="${esc(c.id)}">${esc(c.name)}</option>`).join("");
+ el.value=selected;
+ document.getElementById("clientHint").textContent=clients.length?"Selecione um cliente já cadastrado.":"Cadastre um cliente na seção Clientes antes de criar um orçamento.";
+}
+function openQuote(){
+ if(!clients.length){toast("Cadastre um cliente antes de criar um orçamento.");showPage("clients");return}
+ editingQuote=null;quoteItems=[{description:"",qty:1,price:0}];
+ document.getElementById("quoteForm").reset();fillClientOptions();document.getElementById("qDate").value=dateInputToday();document.getElementById("qValidity").value="";
+ document.getElementById("qDiscount").value="0";document.getElementById("qStatus").value="pending";document.getElementById("qNotes").value="";
+ document.getElementById("quoteModalTitle").textContent="Novo orçamento";document.querySelector("#quoteForm button[type=submit]").textContent="Salvar orçamento";
+ renderQuoteItems();calcQuote();document.getElementById("quoteModal").classList.add("show");
+}
+function closeQuote(){document.getElementById("quoteModal").classList.remove("show")}
+function renderQuoteItems(){
+ document.getElementById("quoteItemRows").innerHTML=quoteItems.map((it,i)=>`<tr><td><input aria-label="Descrição do item ${i+1}" maxlength="120" placeholder="Ex.: Instalação" value="${esc(it.description)}" oninput="quoteItems[${i}].description=this.value"></td><td style="width:75px"><input aria-label="Quantidade" type="number" min="0.01" step="0.01" value="${it.qty}" oninput="quoteItems[${i}].qty=Math.max(0,Number(this.value));calcQuote()"></td><td style="width:145px"><input aria-label="Valor unitário" type="number" min="0" step="0.01" value="${it.price}" oninput="quoteItems[${i}].price=Math.max(0,Number(this.value));calcQuote()"></td><td><button type="button" class="iconbtn" onclick="removeQuoteItem(${i})" aria-label="Remover item">×</button></td></tr>`).join("");
+}
+function addQuoteItem(){quoteItems.push({description:"",qty:1,price:0});renderQuoteItems()}
+function removeQuoteItem(i){if(quoteItems.length===1){quoteItems[0]={description:"",qty:1,price:0}}else quoteItems.splice(i,1);renderQuoteItems();calcQuote()}
+function calcQuote(){
+ const sub=quoteItems.reduce((n,x)=>n+(Number(x.qty)||0)*(Number(x.price)||0),0);
+ const disc=Math.min(Math.max(0,Number(document.getElementById("qDiscount").value)||0),sub);
+ document.getElementById("qSubtotal").textContent=money(sub);document.getElementById("qDiscountLabel").textContent=money(disc);document.getElementById("qTotal").textContent=money(Math.max(0,sub-disc));
+ return {subtotal:sub,discount:disc,total:Math.max(0,sub-disc)};
+}
+function editQuote(id){
+ const x=quotes.find(q=>q.id===id);if(!x)return;
+ editingQuote=id;quoteItems=x.items.map(it=>({...it}));document.getElementById("quoteForm").reset();fillClientOptions(x.clientId);
+ document.getElementById("qDate").value=x.date;document.getElementById("qValidity").value=x.validity||"";document.getElementById("qDiscount").value=x.discount;document.getElementById("qStatus").value=x.status;document.getElementById("qNotes").value=x.notes||"";
+ document.getElementById("quoteModalTitle").textContent="Editar orçamento";document.querySelector("#quoteForm button[type=submit]").textContent="Salvar alterações";
+ renderQuoteItems();calcQuote();document.getElementById("quoteModal").classList.add("show");
+}
+document.getElementById("quoteForm").addEventListener("submit",e=>{
+ e.preventDefault();
+ const clientId=document.getElementById("qClient").value;
+ const items=quoteItems.map(x=>({description:x.description.trim(),qty:Number(x.qty)||0,price:Number(x.price)||0})).filter(x=>x.description&&x.qty>0);
+ if(!clientId){toast("Selecione um cliente.");return}
+ if(!items.length){toast("Adicione ao menos um item com descrição e quantidade.");return}
+ const totals=calcQuote();const data={clientId,date:document.getElementById("qDate").value,validity:document.getElementById("qValidity").value,items,discount:totals.discount,subtotal:totals.subtotal,total:totals.total,status:document.getElementById("qStatus").value,notes:document.getElementById("qNotes").value.trim()};
+ if(editingQuote){const i=quotes.findIndex(x=>x.id===editingQuote);if(i>=0)quotes[i]={...quotes[i],...data,updatedAt:Date.now()};toast("Orçamento atualizado.")}
+ else{const number="ORC-"+String(Date.now()).slice(-6);quotes.push({id:crypto.randomUUID?crypto.randomUUID():String(Date.now()),number,...data,createdAt:Date.now()});toast("Orçamento criado.")}
+ persistQuotes();renderQuotes();closeQuote();
+});
+function deleteQuote(id){const x=quotes.find(q=>q.id===id);if(x&&confirm(`Excluir o orçamento ${x.number}?`)){quotes=quotes.filter(q=>q.id!==id);persistQuotes();renderQuotes();toast("Orçamento excluído.")}}
+function quoteHtml(x){
+ const c=clients.find(c=>c.id===x.clientId)||{};
+ return `<div style="font-family:Arial,sans-serif;color:#19352a"><div style="display:flex;justify-content:space-between;gap:20px;align-items:flex-start"><div><h1 style="margin:0;color:#168653">VendePronto</h1><p style="margin:4px 0;color:#718078">ORÇAMENTO</p></div><div style="text-align:right"><b>${esc(x.number)}</b><p>Data: ${dateLabel(x.date+"T12:00:00")}<br>Validade: ${x.validity?dateLabel(x.validity+"T12:00:00"):"Não informada"}</p></div></div><hr style="border:0;border-top:1px solid #ddd;margin:20px 0"><h3>Cliente</h3><p><b>${esc(c.name||"Cliente")}</b><br>${esc(c.doc||"")}<br>${esc(c.phone||"")} ${esc(c.email||"")}<br>${esc(c.address||"")}</p><h3>Itens</h3><table style="width:100%;border-collapse:collapse"><thead><tr><th style="text-align:left;border-bottom:1px solid #ddd;padding:9px">Descrição</th><th style="text-align:right;border-bottom:1px solid #ddd;padding:9px">Qtd.</th><th style="text-align:right;border-bottom:1px solid #ddd;padding:9px">Unitário</th><th style="text-align:right;border-bottom:1px solid #ddd;padding:9px">Total</th></tr></thead><tbody>${x.items.map(i=>`<tr><td style="padding:9px;border-bottom:1px solid #eee">${esc(i.description)}</td><td style="text-align:right;padding:9px;border-bottom:1px solid #eee">${i.qty}</td><td style="text-align:right;padding:9px;border-bottom:1px solid #eee">${money(i.price)}</td><td style="text-align:right;padding:9px;border-bottom:1px solid #eee">${money(i.qty*i.price)}</td></tr>`).join("")}</tbody></table><div style="text-align:right;margin-top:18px;line-height:1.9">Subtotal: ${money(x.subtotal)}<br>Desconto: ${money(x.discount)}<br><b style="font-size:20px;color:#106b41">Total: ${money(x.total)}</b></div><p style="margin-top:25px"><b>Status:</b> ${statusLabel(x.status)}</p>${x.notes?`<p><b>Observações / condições:</b><br>${esc(x.notes).replace(/\n/g,"<br>")}</p>`:""}<p style="color:#718078;font-size:11px;margin-top:35px">Documento gerado pelo VendePronto PRO.</p></div>`;
+}
+function viewQuote(id){const x=quotes.find(q=>q.id===id);if(!x)return;document.getElementById("quoteViewBody").innerHTML=quoteHtml(x);document.getElementById("quoteViewModal").classList.add("show")}
+function closeQuoteView(){document.getElementById("quoteViewModal").classList.remove("show")}
+function printQuote(){const body=document.getElementById("quoteViewBody").innerHTML;const w=window.open("","_blank");if(!w){toast("Permita pop-ups para imprimir o PDF.");return}w.document.write(`<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><title>Orçamento VendePronto</title><style>body{font-family:Arial,sans-serif;padding:35px;max-width:850px;margin:auto}h3{margin-top:25px} @media print{body{padding:0}}</style></head><body>${body}<script>window.onload=()=>window.print()<\/script></body></html>`);w.document.close()}
+document.getElementById("quoteModal").addEventListener("click",e=>{if(e.target.id==="quoteModal")closeQuote()});
+document.getElementById("quoteViewModal").addEventListener("click",e=>{if(e.target.id==="quoteViewModal")closeQuoteView()});
+
+render();renderQuotes();
 </script>
 </body>
 </html>
