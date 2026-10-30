@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f5f8f6">
+<title>VendePronto PRO</title>
+<style>
+:root{--g:#168653;--gd:#106b41;--mint:#eaf6ef;--bg:#f5f8f6;--ink:#19352a;--muted:#718078;--line:#e3ebe6;--white:#fff;--danger:#b84343;--shadow:0 12px 35px #173c2810}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}button,input,textarea,select{font:inherit}button{cursor:pointer}
+.app{display:flex;min-height:100vh}.side{width:245px;flex-shrink:0;background:#fff;border-right:1px solid var(--line);padding:24px 15px;display:flex;flex-direction:column}.brand{display:flex;gap:10px;align-items:center;padding:0 8px 27px}.logo{height:39px;width:39px;border-radius:12px;background:var(--g);color:white;display:grid;place-items:center;font-weight:900;font-size:20px}.brand b{font-size:17px}.brand small{display:block;color:var(--g);font-weight:800;font-size:10px;letter-spacing:1.7px;margin-top:2px}.navtitle{font-size:10px;letter-spacing:1.4px;color:#9aa79f;font-weight:800;padding:0 10px 9px}.nav{display:grid;gap:4px}.nav button{border:0;background:none;text-align:left;padding:11px 12px;border-radius:10px;color:#596a60;font-weight:650;font-size:13px}.nav button:hover,.nav button.active{background:var(--mint);color:var(--gd)}.nav button span{display:inline-block;width:27px}.sidefoot{margin-top:auto;border-top:1px solid var(--line);padding:16px 8px 0;color:var(--muted);font-size:11px;line-height:1.6}
+.main{flex:1;min-width:0}.top{height:68px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 32px}.crumb{font-size:13px;color:var(--muted)}.profile{display:flex;align-items:center;gap:9px;font-size:12px;font-weight:700}.avatar{width:34px;height:34px;border-radius:50%;background:var(--mint);color:var(--g);display:grid;place-items:center}
+.wrap{max-width:1180px;margin:auto;padding:32px}.page{display:none}.page.active{display:block}.head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:23px}.head h1{font-size:27px;margin:0 0 6px;letter-spacing:-.5px}.head p{margin:0;color:var(--muted);font-size:13px}.btn{border:0;border-radius:9px;padding:11px 15px;font-weight:750;font-size:13px}.primary{background:var(--g);color:#fff}.primary:hover{background:var(--gd)}.outline{background:#fff;border:1px solid var(--line);color:var(--ink)}.soft{background:var(--mint);color:var(--gd)}.danger{background:#fff1f1;color:var(--danger)}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:18px}.metric,.panel{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:var(--shadow)}.metric small{font-size:12px;color:var(--muted);font-weight:650}.metric strong{display:block;font-size:25px;margin-top:8px}.panel h2{font-size:15px;margin:0 0 14px}.muted{color:var(--muted);font-size:13px;line-height:1.6}.notice{background:#f0f6f2;border-radius:10px;padding:12px 14px;font-size:11px;color:#617268;line-height:1.55;margin-top:16px}
+.toolbar{display:flex;gap:10px;margin-bottom:14px}.search{position:relative;flex:1}.search input{width:100%;padding:11px 13px 11px 37px;border:1px solid var(--line);border-radius:9px;background:white;outline:none}.search:before{content:"⌕";position:absolute;left:13px;top:5px;font-size:23px;color:#84938a}.search input:focus,.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--g);box-shadow:0 0 0 3px #16865315}.filter{border:1px solid var(--line);background:#fff;border-radius:9px;padding:0 12px;color:#506157}
+.tablebox{overflow:auto}table{width:100%;border-collapse:collapse;min-width:600px}th{text-align:left;color:#829087;font-size:10px;text-transform:uppercase;letter-spacing:.7px;padding:12px 10px;border-bottom:1px solid var(--line)}td{padding:13px 10px;border-bottom:1px solid #edf2ee;font-size:12px}tbody tr:last-child td{border-bottom:0}.person{display:flex;align-items:center;gap:9px}.initial{height:33px;width:33px;flex-shrink:0;border-radius:10px;background:var(--mint);color:var(--gd);display:grid;place-items:center;font-weight:800}.person b{display:block;font-size:12px}.person small{color:var(--muted);font-size:10px}.actions{display:flex;gap:6px}.iconbtn{border:1px solid var(--line);background:#fff;border-radius:7px;padding:6px 8px;color:#52645a;font-size:11px}.empty{text-align:center;padding:42px 18px;color:var(--muted);font-size:12px}.empty .symbol{font-size:28px;margin-bottom:9px}.empty b{display:block;color:var(--ink);font-size:14px;margin-bottom:5px}
+.modalback{position:fixed;inset:0;background:#10271db0;display:none;align-items:center;justify-content:center;padding:16px;z-index:5}.modalback.show{display:flex}.modal{background:#fff;border-radius:16px;width:min(620px,100%);max-height:92vh;overflow:auto;box-shadow:0 25px 80px #0003}.modalhead{padding:20px 22px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}.modalhead h2{font-size:18px;margin:0}.close{border:0;background:#f2f5f3;border-radius:8px;width:32px;height:32px;font-size:18px;color:#607067}.modalbody{padding:21px 22px}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:13px}.field{display:grid;gap:6px}.field.full{grid-column:1/-1}.field label{font-size:11px;font-weight:750;color:#52645a}.field input,.field textarea,.field select{width:100%;border:1px solid var(--line);border-radius:9px;padding:11px 12px;outline:none;font-size:13px}.field textarea{min-height:75px;resize:vertical}.hint{font-size:10px;color:var(--muted)}.modalfoot{display:flex;justify-content:flex-end;gap:8px;padding:15px 22px;border-top:1px solid var(--line)}.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#183c2b;color:white;padding:11px 16px;border-radius:9px;font-size:12px;display:none;z-index:8;box-shadow:var(--shadow)}.toast.show{display:block}
+.detailrow{display:grid;grid-template-columns:130px 1fr;gap:12px;padding:10px 0;border-bottom:1px solid #edf2ee;font-size:12px}.detailrow:last-child{border:0}.detailrow span{color:var(--muted)}
+@media(max-width:800px){.side{width:205px}.wrap{padding:23px}.cards{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:620px){.app{display:block}.side{width:100%;padding:12px 12px 8px;border-right:0;border-bottom:1px solid var(--line)}.brand{padding:0 4px 12px}.navtitle,.sidefoot{display:none}.nav{display:flex;overflow-x:auto;gap:3px;padding-bottom:2px}.nav button{white-space:nowrap;padding:9px 10px;font-size:11px}.nav button span{width:auto;margin-right:5px}.top{height:52px;padding:0 15px}.wrap{padding:21px 14px}.head{display:block}.head .btn{margin-top:14px;width:100%}.head h1{font-size:24px}.cards{gap:8px}.metric{padding:12px}.metric small{font-size:10px}.metric strong{font-size:21px}.toolbar{flex-direction:column}.filter{padding:11px}.formgrid{grid-template-columns:1fr}.field.full{grid-column:auto}.modalback{align-items:flex-end;padding:0}.modal{border-radius:17px 17px 0 0;max-height:94vh}.modalbody{padding:17px}.modalhead,.modalfoot{padding:15px 17px}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="side">
+ <div class="brand"><div class="logo">V</div><div><b>VendePronto</b><small>PRO</small></div></div>
+ <div class="navtitle">MENU PRINCIPAL</div>
+ <nav class="nav">
+  <button data-page="dashboard"><span>⌂</span>Visão geral</button>
+  <button data-page="clients" class="active"><span>♙</span>Clientes</button>
+  <button data-page="quotes"><span>▤</span>Orçamentos</button>
+  <button data-page="services"><span>▣</span>Serviços</button>
+  <button data-page="receivables"><span>◷</span>Contas a receber</button>
+  <button data-page="reports"><span>▥</span>Relatórios</button>
+  <button data-page="customize"><span>✧</span>Personalização</button>
+  <button data-page="settings"><span>⚙</span>Configurações</button>
+ </nav>
+ <div class="sidefoot">Ambiente de desenvolvimento<br><b>VendePronto PRO · Módulo de clientes</b></div>
+</aside>
+<main class="main">
+ <header class="top"><div class="crumb">VendePronto PRO / <b id="crumb">Clientes</b></div><div class="profile"><div class="avatar">VP</div><span>Minha empresa</span></div></header>
+ <div class="wrap">
+  <section class="page" id="dashboard">
+   <div class="head"><div><h1>Visão geral</h1><p>Resumo da organização do seu negócio.</p></div></div>
+   <div class="cards"><div class="metric"><small>Clientes cadastrados</small><strong id="dashClients">0</strong></div><div class="metric"><small>Orçamentos</small><strong>—</strong></div><div class="metric"><small>Serviços ativos</small><strong>—</strong></div></div>
+   <div class="panel"><h2>Bem-vindo ao VendePronto PRO</h2><p class="muted">Comece cadastrando seus clientes. Depois, cada cliente poderá ser relacionado a orçamentos, serviços e registros de recebimentos.</p><button class="btn primary" onclick="openNew()">＋ Cadastrar cliente</button></div>
+  </section>
+  <section class="page active" id="clients">
+   <div class="head"><div><h1>Clientes</h1><p>Cadastre e organize os contatos do seu negócio.</p></div><button class="btn primary" onclick="openNew()">＋ Novo cliente</button></div>
+   <div class="cards"><div class="metric"><small>Total de clientes</small><strong id="total">0</strong></div><div class="metric"><small>Com telefone</small><strong id="withPhone">0</strong></div><div class="metric"><small>Com e-mail</small><strong id="withEmail">0</strong></div></div>
+   <div class="panel"><div class="toolbar"><div class="search"><input id="search" placeholder="Buscar por nome, telefone, e-mail ou documento..." oninput="render()"></div><select id="sort" class="filter" onchange="render()"><option value="new">Mais recentes</option><option value="az">Nome: A–Z</option><option value="za">Nome: Z–A</option></select></div>
+    <div class="tablebox"><table><thead><tr><th>Cliente</th><th>Telefone</th><th>E-mail</th><th>Cadastro</th><th>Ações</th></tr></thead><tbody id="clientRows"></tbody></table></div>
+    <div id="empty" class="empty"><div class="symbol">♙</div><b>Nenhum cliente cadastrado</b>Adicione seu primeiro cliente para começar a organizar sua carteira.</div>
+   </div>
+   <div class="notice"><b>Protótipo de desenvolvimento:</b> por enquanto, os dados ficam salvos apenas neste navegador. Ainda não há sincronização em nuvem nem login. Use informações fictícias durante os testes. O banco Supabase será conectado em uma próxima etapa.</div>
+  </section>
+  <section class="page" id="quotes"><div class="head"><div><h1>Orçamentos</h1><p>Propostas comerciais relacionadas aos seus clientes.</p></div></div><div class="panel"><div class="empty"><div class="symbol">▤</div><b>Próximo módulo</b>Vamos implementar criação, edição, itens, cálculos e PDF depois de concluir clientes.</div></div></section>
+  <section class="page" id="services"><div class="head"><div><h1>Serviços</h1><p>Acompanhe o andamento dos trabalhos.</p></div></div><div class="panel"><div class="empty"><b>Próximo módulo</b>Gestão de serviços e status será desenvolvida em seguida.</div></div></section>
+  <section class="page" id="receivables"><div class="head"><div><h1>Contas a receber</h1><p>Registre valores previstos e recebimentos informados manualmente.</p></div></div><div class="panel"><div class="empty"><b>Próximo módulo</b>O sistema não movimentará dinheiro. Será apenas um controle de registros.</div></div></section>
+  <section class="page" id="reports"><div class="head"><div><h1>Relatórios</h1><p>Indicadores para acompanhar seu negócio.</p></div></div><div class="panel"><div class="empty"><b>Próximo módulo</b>Os relatórios usarão dados registrados nos outros módulos.</div></div></section>
+  <section class="page" id="customize"><div class="head"><div><h1>Personalização</h1><p>Identidade visual dos seus documentos.</p></div></div><div class="panel"><div class="empty"><b>Próximo módulo</b>Nome da empresa, logotipo e cores personalizadas.</div></div></section>
+  <section class="page" id="settings"><div class="head"><div><h1>Configurações</h1><p>Conta, preferências e segurança.</p></div></div><div class="panel"><div class="empty"><b>Conexão em nuvem pendente</b>Autenticação e banco de dados serão ligados ao Supabase após a configuração do projeto.</div></div></section>
+ </div>
+</main>
+</div>
+<div class="modalback" id="modal">
+ <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modalhead"><h2 id="modalTitle">Novo cliente</h2><button class="close" onclick="closeModal()" aria-label="Fechar">×</button></div>
+  <form id="clientForm">
+   <div class="modalbody"><div class="formgrid">
+    <div class="field full"><label for="name">Nome completo ou razão social *</label><input id="name" required maxlength="120" placeholder="Ex.: Maria Oliveira"></div>
+    <div class="field"><label for="doc">CPF/CNPJ (opcional)</label><input id="doc" maxlength="24" placeholder="Somente se necessário"></div>
+    <div class="field"><label for="phone">Telefone / WhatsApp</label><input id="phone" maxlength="30" placeholder="(00) 00000-0000"></div>
+    <div class="field full"><label for="email">E-mail</label><input id="email" type="email" maxlength="150" placeholder="cliente@email.com"></div>
+    <div class="field full"><label for="address">Endereço</label><input id="address" maxlength="180" placeholder="Rua, número, cidade (opcional)"></div>
+    <div class="field full"><label for="notes">Observações</label><textarea id="notes" maxlength="1000" placeholder="Informações úteis sobre o cliente..."></textarea><span class="hint">Evite inserir informações sensíveis que não sejam necessárias.</span></div>
+   </div></div>
+   <div class="modalfoot"><button type="button" class="btn outline" onclick="closeModal()">Cancelar</button><button class="btn primary" type="submit">Salvar cliente</button></div>
+  </form>
+ </div>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+const KEY="vendepronto_pro_clients_v1";
+let clients=load(),editing=null;
+function load(){try{return JSON.parse(localStorage.getItem(KEY)||"[]")}catch(e){return []}}
+function persist(){localStorage.setItem(KEY,JSON.stringify(clients))}
+function esc(v=""){return String(v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function initials(n){return n.trim().split(/\s+/).slice(0,2).map(x=>x[0]||"").join("").toUpperCase()}
+function dateLabel(d){return new Intl.DateTimeFormat("pt-BR").format(new Date(d))}
+function toast(msg){let t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),2300)}
+function render(){
+ const q=document.getElementById("search").value.toLocaleLowerCase("pt-BR");
+ let arr=clients.filter(c=>[c.name,c.doc,c.phone,c.email].join(" ").toLocaleLowerCase("pt-BR").includes(q));
+ const sort=document.getElementById("sort").value;
+ arr.sort((a,b)=>sort==="az"?a.name.localeCompare(b.name,"pt-BR"):sort==="za"?b.name.localeCompare(a.name,"pt-BR"):b.createdAt-a.createdAt);
+ document.getElementById("total").textContent=clients.length;
+ document.getElementById("withPhone").textContent=clients.filter(c=>c.phone).length;
+ document.getElementById("withEmail").textContent=clients.filter(c=>c.email).length;
+ document.getElementById("dashClients").textContent=clients.length;
+ const tbody=document.getElementById("clientRows");
+ tbody.innerHTML=arr.map(c=>`<tr><td><div class="person"><div class="initial">${esc(initials(c.name))}</div><div><b>${esc(c.name)}</b><small>${esc(c.doc||"Cliente")}</small></div></div></td><td>${esc(c.phone||"—")}</td><td>${esc(c.email||"—")}</td><td>${dateLabel(c.createdAt)}</td><td><div class="actions"><button class="iconbtn" onclick="viewClient('${c.id}')">Ver</button><button class="iconbtn" onclick="editClient('${c.id}')">Editar</button><button class="iconbtn" onclick="deleteClient('${c.id}')">Excluir</button></div></td></tr>`).join("");
+ document.getElementById("empty").style.display=arr.length?"none":"block";
+ tbody.parentElement.style.display=arr.length?"table":"none";
+}
+function openNew(){editing=null;document.getElementById("clientForm").reset();document.getElementById("modalTitle").textContent="Novo cliente";document.querySelector("#clientForm button[type=submit]").textContent="Salvar cliente";document.getElementById("modal").classList.add("show");setTimeout(()=>document.getElementById("name").focus(),80)}
+function closeModal(){document.getElementById("modal").classList.remove("show")}
+function editClient(id){const c=clients.find(x=>x.id===id);if(!c)return;editing=id;for(const k of ["name","doc","phone","email","address","notes"])document.getElementById(k).value=c[k]||"";document.getElementById("modalTitle").textContent="Editar cliente";document.querySelector("#clientForm button[type=submit]").textContent="Salvar alterações";document.getElementById("modal").classList.add("show")}
+function viewClient(id){const c=clients.find(x=>x.id===id);if(!c)return;alert("CLIENTE\\n\\n"+c.name+"\\nTelefone: "+(c.phone||"—")+"\\nE-mail: "+(c.email||"—")+"\\nDocumento: "+(c.doc||"—")+"\\nEndereço: "+(c.address||"—")+"\\nObservações: "+(c.notes||"—"))}
+function deleteClient(id){const c=clients.find(x=>x.id===id);if(!c)return;if(confirm(`Excluir o cadastro de ${c.name}? Esta ação não poderá ser desfeita.`)){clients=clients.filter(x=>x.id!==id);persist();render();toast("Cliente excluído.")}}
+document.getElementById("clientForm").addEventListener("submit",e=>{e.preventDefault();const data={};for(const k of ["name","doc","phone","email","address","notes"])data[k]=document.getElementById(k).value.trim();if(!data.name)return; if(editing){const i=clients.findIndex(c=>c.id===editing);if(i>=0)clients[i]={...clients[i],...data,updatedAt:Date.now()};toast("Cadastro atualizado.")}else{clients.push({id:crypto.randomUUID?crypto.randomUUID():String(Date.now()),...data,createdAt:Date.now()});toast("Cliente cadastrado.")}persist();render();closeModal()});
+document.querySelectorAll(".nav button").forEach(b=>b.addEventListener("click",()=>showPage(b.dataset.page)));
+function showPage(id){document.querySelectorAll(".page").forEach(p=>p.classList.toggle("active",p.id===id));document.querySelectorAll(".nav button").forEach(b=>b.classList.toggle("active",b.dataset.page===id));document.getElementById("crumb").textContent=bLabel(id);window.scrollTo(0,0)}
+function bLabel(id){const b=document.querySelector(`[data-page="${id}"]`);return b?b.textContent.trim():"VendePronto PRO"}
+document.getElementById("modal").addEventListener("click",e=>{if(e.target.id==="modal")closeModal()});
+render();
+</script>
+</body>
+</html>
